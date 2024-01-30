@@ -7,14 +7,13 @@
     <title>Test</title>
 </head>
 <body>
-    <h1>DataBase Load</h1>
+    <h1>Table Standard</h1>
     <ul>
-        {{-- @foreach ($tesult as $row)
-            <li>{{$row}}</li>
-        @endforeach --}}
-
-        @foreach ($standards as $standard)
+        {{-- @foreach ($standards as $standard)
             <li>{{$standard->name}} | {{$standard->khooshe_name}}</li>
+        @endforeach --}}
+        @foreach ($standards as $standard)
+            <li>{{$standard}}</li>
         @endforeach
     </ul>
 </body>
