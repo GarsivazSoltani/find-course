@@ -7,6 +7,6 @@
     <title>Test</title>
 </head>
 <body>
-    <h1>DataBase Loade</h1>
+    <h1>DataBase Load</h1>
 </body>
 </html>
