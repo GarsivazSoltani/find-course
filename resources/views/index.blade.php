@@ -8,5 +8,10 @@
 </head>
 <body>
     <h1>DataBase Load</h1>
+    <ul>
+        @foreach ($standards as $standard)
+            <li>{{$standard->name}}</li>
+        @endforeach
+    </ul>
 </body>
 </html>
