@@ -9,4 +9,8 @@ class AzmoonData extends Model
 {
     use HasFactory;
     protected $table = 'azmoon_data';
+    // public function standard()
+    // {
+    //     return $this->belongsTo('App\Models\Standard', 'standard_id');
+    // }
 }

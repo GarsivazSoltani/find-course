@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AzmoonData;
+use App\Models\AzmoonHoze;
 use App\Models\Standard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +37,29 @@ class HomeController extends Controller
 
     public function fechAzmoonData()
     {
-        $azmoonDatas = AzmoonData::take(25)->get();
+        $azmoonDatas = AzmoonData::take(2)->get();
         return view('azmoondata', compact('azmoonDatas'));
+    }
+
+    public function fechAzmoonHoze()
+    {
+        $dateAzmoon = '01/31/24	';
+        $azmoonHozes = AzmoonHoze::where('date', '=', $dateAzmoon);
+        return view('azmoonhoze', compact('azmoonHozes'));
+    }
+
+    public function joinTables()
+    {
+        $standardName = 'آرایشگر و پیرایشگر موی مردانه';
+        // $joinDatas = Standard::where('name', '=', $standardName);
+
+        // $joinDatas = AzmoonData::where('standard.name', '=', $standardName)->standard;
+
+        $joinDatas = Standard::find(96111960)->azmoonDataTable;
+
+        // $joinDatas= Standard::with('azmoonDataTable');
+
+        // dd($joinDatas);
+        return view('join', compact('joinDatas'));
     }
 }

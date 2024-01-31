@@ -9,4 +9,9 @@ class Standard extends Model
 {
     use HasFactory;
     protected $table = 'standard';
+
+    public function azmoonDataTable()
+    {
+        return $this->hasMany('App\Models\AzmoonData');
+    }
 }

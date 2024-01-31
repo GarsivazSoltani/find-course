@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('standard', [HomeController::class, 'fechStandard'])->name('standard');
 Route::get('azmoondata', [HomeController::class, 'fechAzmoonData'])->name('azmoonData');
+Route::get('azmoonhoze', [HomeController::class, 'fechAzmoonHoze'])->name('azmoonHoze');
+Route::get('join', [HomeController::class, 'joinTables'])->name('joinTable');
 
 // Route::get('/', function () {
 //     return view('welcome');
