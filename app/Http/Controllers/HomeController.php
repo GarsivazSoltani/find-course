@@ -43,7 +43,7 @@ class HomeController extends Controller
 
     public function fechAzmoonHoze()
     {
-        $dateAzmoon = '01/31/24	';
+        $dateAzmoon = '01/10/24';
         $azmoonHozes = AzmoonHoze::where('date', '=', $dateAzmoon);
         return view('azmoonhoze', compact('azmoonHozes'));
     }
@@ -51,13 +51,15 @@ class HomeController extends Controller
     public function joinTables()
     {
         $standardName = 'آرایشگر و پیرایشگر موی مردانه';
-        // $joinDatas = Standard::where('name', '=', $standardName);
+        $standardId = Standard::where('name', '=', $standardName)->get();
+        // dd($standardId[0]->id);
 
         // $joinDatas = AzmoonData::where('standard.name', '=', $standardName)->standard;
+        // $joinDatas = AzmoonData::where('name', $standardName)->standard;
+        $dateAzmoon = '01/10/24';
+        $joinDatas = Standard::find($standardId[0]->id)->azmoonDataTable->where('date', '=' , $dateAzmoon);
 
-        $joinDatas = Standard::find(96111960)->azmoonDataTable;
-
-        // $joinDatas= Standard::with('azmoonDataTable');
+        // $joinDatas= Standard::with('standard.azmoonDataTable')->get();
 
         // dd($joinDatas);
         return view('join', compact('joinDatas'));
