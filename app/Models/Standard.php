@@ -14,4 +14,9 @@ class Standard extends Model
     {
         return $this->hasMany('App\Models\AzmoonData');
     }
+
+    public function azmoonTable()
+    {
+        return $this->hasMany('App\Models\Azmoon','id3');
+    }
 }

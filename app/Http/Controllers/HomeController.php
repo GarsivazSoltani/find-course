@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Azmoon;
 use App\Models\AzmoonData;
 use App\Models\AzmoonHoze;
 use App\Models\Standard;
@@ -23,21 +24,46 @@ class HomeController extends Controller
         return view('index', compact('standards'));
     }
 
-    public function fechStandard()
+    public function findStandardNameForm()
     {
-        // $azmoonDatas = AzmoonData::take(25)->get();
+        $standards = Standard::where('name', 'like', '%کارور%')
+                                    ->orderBy('name')
+                                    ->take(10)
+                                    ->get();
+        return view('standard', compact('standards'));
+    }
+    public function findStandard(Request $request)
+    {
+        // dd($request->standard);
+        // $standars = Standard::where('name', 'like', '%' . $request->standard . '%')
+        //                             ->orderBy('name')
+        //                             ->get();
+        // $standardId = Standard::where('name', '=', $standardName)->get();
+        // $dateAzmoon = '01/10/24';
+        // $joinDatas = Standard::find($standardId[0]->id)->azmoonDataTable->where('date', '=' , $dateAzmoon);
+        // joinDatas = Standard::find($standardId[0]->id)->azmoonDataTable->where('date', '=' , $dateAzmoon);
 
-        // $tesult = Standard::select('standard.*')
-        //     ->join('azmoon_data', 'id', '=', 'standard.id');
-        // $tesult = Standard::select('standard.*')->join('azmoon_data', 'id', '=', 'standard.standard_id');
-        $standards = Standard::take(2)->get();
+        $standards = Standard::whereHas('azmoonTable', $filter = function ($query) {
+            $query->where('name', 'like', '%'. 'کاربر' .'%');
+        })->with(['azmoonTable' => $filter])->get();
+        // dd($standards);
+
+        //Standard::where(['column_1' => 'value_1','column_2' => 'value_2'])->get();
         // $standards = Standard::all();
         return view('standard', compact('standards'));
     }
 
+    public function fechAzmoon()
+    {
+        // $azmoons = Azmoon::all();
+        // $azmoons = Azmoon::take(25)->get();
+        $azmoons = Azmoon::find(98199)->get();
+        return view('azmoon', compact('azmoons'));
+    }
+
     public function fechAzmoonData()
     {
-        $azmoonDatas = AzmoonData::take(2)->get();
+        $azmoonDatas = AzmoonData::take(25)->get();
         return view('azmoondata', compact('azmoonDatas'));
     }
 
