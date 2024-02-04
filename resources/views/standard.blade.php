@@ -16,7 +16,8 @@
     </form>
     <ul>
         @foreach ($standards as $standard)
-            <li>{{$standard->id}} , {{$standard->name}} , {{$standard->code}} , {{$standard->khooshe_name}}</li>
+            {{-- <li>{{$standard->id}} , {{$standard->name}} , {{$standard->code}} , {{$standard->khooshe_name}}</li> --}}
+            <li>{{$standard->name}} | {{$standard->khooshe_name}}</li>
         @endforeach
     </ul>
 </body>

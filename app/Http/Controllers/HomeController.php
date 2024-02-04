@@ -26,30 +26,62 @@ class HomeController extends Controller
 
     public function findStandardNameForm()
     {
-        $standards = Standard::where('name', 'like', '%کارور%')
-                                    ->orderBy('name')
-                                    ->take(10)
-                                    ->get();
+        $standards = [];
+        // $standards = Standard::where('name', 'like', '%کاربر رایانه%')
+        //                             ->orderBy('name')
+        //                             // ->take(10)
+        //                             ->get();
+        // dd(now());
         return view('standard', compact('standards'));
     }
     public function findStandard(Request $request)
     {
         // dd($request->standard);
-        // $standars = Standard::where('name', 'like', '%' . $request->standard . '%')
-        //                             ->orderBy('name')
-        //                             ->get();
         // $standardId = Standard::where('name', '=', $standardName)->get();
         // $dateAzmoon = '01/10/24';
         // $joinDatas = Standard::find($standardId[0]->id)->azmoonDataTable->where('date', '=' , $dateAzmoon);
-        // joinDatas = Standard::find($standardId[0]->id)->azmoonDataTable->where('date', '=' , $dateAzmoon);
 
-        $standards = Standard::whereHas('azmoonTable', $filter = function ($query) {
-            $query->where('name', 'like', '%'. 'کاربر' .'%');
-        })->with(['azmoonTable' => $filter])->get();
-        // dd($standards);
+        // $standards = Standard::where('name', 'like', '%' . $request->standard . '%')
+        //                     ->orderBy('name')
+        //                     ->get();
 
-        //Standard::where(['column_1' => 'value_1','column_2' => 'value_2'])->get();
-        // $standards = Standard::all();
+        // $standards = Standard::whereHas('azmoonTable', $filter = function ($query) {
+        //     $query->where('sabte_nam_to', '>', '1400/01/14');
+        //     // ->where('standard.name', 'like', '%'. request()->input('standard') .'%');
+        //     // dd($query->toSql());
+        // })->with(['azmoonTable' => $filter])->toSql();
+
+        // $standards = Azmoon::whereHas('standardTable', $filter = function ($query) {
+        //     $query->where('name', 'like', '%'. request()->input('standard') .'%');
+        //     // dd($query->toSql());
+        // })->with(['standardTable' => $filter])->get();
+
+
+        // $standards = DB::table('standard')
+        //     ->join('azmoon_data', 'standard.id', '=', 'azmoon_data.standard_id')
+        //     ->join('azmoon', 'azmoon.id', '=', 'azmoon_data.azmoon_code')
+        //     ->select('standard.*')
+        //     ->where('standard.name', 'like', '%کاربر%')
+        //     ->AND('azmoon.sabte_nam_to', '>', '1402/11/15')
+        //     ->limit(0, 30)
+        //     ->get();
+
+        // ----------------------------------------
+        // $standards = DB::table('standard')->where('name', 'like', '%' . $request->standard . '%')->get();
+        // $standards = DB::table('standard')->pluck($request->standard);
+        // $standards = DB::table('standard')->select('id', 'name', 'code', 'khooshe_name')->get();
+        $standards = DB::table('standard')
+        ->join('azmoon_data', 'standard.id', '=', 'azmoon_data.standard_id')
+        ->join('azmoon', 'azmoon.id', '=', 'azmoon_data.azmoon_code')
+        ->where('standard.name', 'like', '%' . $request->standard . '%')
+        ->where('azmoon.sabte_nam_to', '>', '1402/11/15')
+        // ->select('standard.name', 'azmoon_data.*', 'azmoon.*')
+        ->select('standard.name', 'standard.code', 'standard.khooshe_name')
+        ->orderBy('standard.name')
+        ->limit(20)
+        ->get();
+        
+        dd($standards->count());
         return view('standard', compact('standards'));
     }
 

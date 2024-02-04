@@ -9,7 +9,7 @@ class AzmoonData extends Model
 {
     use HasFactory;
     protected $table = 'azmoon_data';
-    // protected $primaryKey = 'azmoon_id';
+    protected $primaryKey = 'azmoon_code';
     
     // public function standard()
     // {
