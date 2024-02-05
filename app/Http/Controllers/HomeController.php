@@ -6,7 +6,9 @@ use App\Models\Azmoon;
 use App\Models\AzmoonData;
 use App\Models\AzmoonHoze;
 use App\Models\Standard;
+use App\Services\FindStandard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -57,31 +59,12 @@ class HomeController extends Controller
         // })->with(['standardTable' => $filter])->get();
 
 
-        // $standards = DB::table('standard')
-        //     ->join('azmoon_data', 'standard.id', '=', 'azmoon_data.standard_id')
-        //     ->join('azmoon', 'azmoon.id', '=', 'azmoon_data.azmoon_code')
-        //     ->select('standard.*')
-        //     ->where('standard.name', 'like', '%کاربر%')
-        //     ->AND('azmoon.sabte_nam_to', '>', '1402/11/15')
-        //     ->limit(0, 30)
-        //     ->get();
-
-        // ----------------------------------------
-        // $standards = DB::table('standard')->where('name', 'like', '%' . $request->standard . '%')->get();
-        // $standards = DB::table('standard')->pluck($request->standard);
-        // $standards = DB::table('standard')->select('id', 'name', 'code', 'khooshe_name')->get();
-        $standards = DB::table('standard')
-        ->join('azmoon_data', 'standard.id', '=', 'azmoon_data.standard_id')
-        ->join('azmoon', 'azmoon.id', '=', 'azmoon_data.azmoon_code')
-        ->where('standard.name', 'like', '%' . $request->standard . '%')
-        ->where('azmoon.sabte_nam_to', '>', '1402/11/15')
-        // ->select('standard.name', 'azmoon_data.*', 'azmoon.*')
-        ->select('standard.name', 'standard.code', 'standard.khooshe_name')
-        ->orderBy('standard.name')
-        ->limit(20)
-        ->get();
-        
-        dd($standards->count());
+        // $st = new FindStandard();
+        $st = resolve(FindStandard::class);
+        $standards = $st->find($request);
+        // dd($standards);
+        // $json = json_encode($standards);
+        // dd($json);
         return view('standard', compact('standards'));
     }
 
