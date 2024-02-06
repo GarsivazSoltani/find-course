@@ -22,7 +22,8 @@ class HomeController extends Controller
         // $standards = Standard::all();
         // $standards = Standard::find([15,25,42,85]);
 
-        $standards = Standard::take(25)->get();
+        // $standards = Standard::take(10)->get();
+        $standards = Standard::paginate(10);
         return view('index', compact('standards'));
     }
 
@@ -38,9 +39,6 @@ class HomeController extends Controller
     }
     public function findStandard(Request $request)
     {
-        // dd($request->standard);
-        // $standardId = Standard::where('name', '=', $standardName)->get();
-        // $dateAzmoon = '01/10/24';
         // $joinDatas = Standard::find($standardId[0]->id)->azmoonDataTable->where('date', '=' , $dateAzmoon);
 
         // $standards = Standard::where('name', 'like', '%' . $request->standard . '%')
@@ -58,11 +56,18 @@ class HomeController extends Controller
         //     // dd($query->toSql());
         // })->with(['standardTable' => $filter])->get();
 
-
         // $st = new FindStandard();
         $st = resolve(FindStandard::class);
         $standards = $st->find($request);
-        // dd($standards);
+        // dd($standards->all());
+
+        // $result = $standards->filter(function ($value, $key){
+        //     return $value['group_name'] == 'صنايع خودرو';
+        // });
+        // dd($result->all());
+
+        // $s = $standards->where('group_nam', 'صنايع خودرو');
+        // dd($s);
         // $json = json_encode($standards);
         // dd($json);
         return view('standard', compact('standards'));

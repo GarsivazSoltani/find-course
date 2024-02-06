@@ -239,12 +239,11 @@ a {
 } */
 .container {
     height: 350px;
-    width: 430px;
+    width: 450px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-    padding: 1px;
-    margin: auto;
+    margin-top: 45px;
     overflow-y: auto;
 }
 /* #input {
