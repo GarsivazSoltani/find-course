@@ -15,12 +15,7 @@ class HomeController extends Controller
 {
     public function home()
     {
-        // $standards = DB::table('standard')->get();
-        // group_name	khooshe_name
-        // $standards = DB::table('standard')->where('khooshe_name', 'صنعت')->get();
-
         // $standards = Standard::all();
-        // $standards = Standard::find([15,25,42,85]);
 
         // $standards = Standard::take(10)->get();
         $standards = Standard::paginate(10);
@@ -30,21 +25,10 @@ class HomeController extends Controller
     public function findStandardNameForm()
     {
         $standards = [];
-        // $standards = Standard::where('name', 'like', '%کاربر رایانه%')
-        //                             ->orderBy('name')
-        //                             // ->take(10)
-        //                             ->get();
-        // dd(now());
         return view('standard', compact('standards'));
     }
     public function findStandard(Request $request)
     {
-        // $joinDatas = Standard::find($standardId[0]->id)->azmoonDataTable->where('date', '=' , $dateAzmoon);
-
-        // $standards = Standard::where('name', 'like', '%' . $request->standard . '%')
-        //                     ->orderBy('name')
-        //                     ->get();
-
         // $standards = Standard::whereHas('azmoonTable', $filter = function ($query) {
         //     $query->where('sabte_nam_to', '>', '1400/01/14');
         //     // ->where('standard.name', 'like', '%'. request()->input('standard') .'%');
@@ -59,15 +43,6 @@ class HomeController extends Controller
         // $st = new FindStandard();
         $st = resolve(FindStandard::class);
         $standards = $st->find($request);
-        // dd($standards->all());
-
-        // $result = $standards->filter(function ($value, $key){
-        //     return $value['group_name'] == 'صنايع خودرو';
-        // });
-        // dd($result->all());
-
-        // $s = $standards->where('group_nam', 'صنايع خودرو');
-        // dd($s);
         // $json = json_encode($standards);
         // dd($json);
         return view('standard', compact('standards'));

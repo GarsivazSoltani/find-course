@@ -44,7 +44,7 @@ class FindStandard
                     ->select('v_azmoon.id', 'v_azmoon.name', 'v_azmoon.ostanname')
                     ->where('standard.name', 'like', '%' . $request->standard . '%')
                     ->orderBy('standard.name')
-                    ->get();
+                    ->paginate(10);
         return $standards;
     }
 }
