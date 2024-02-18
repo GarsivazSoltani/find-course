@@ -48,6 +48,14 @@ class HomeController extends Controller
         return view('standard', compact('standards'));
     }
 
+    public function findStandardJson(Request $request)
+    {
+        $st = resolve(FindStandard::class);
+        $standards = $st->find($request);
+        $json = json_encode($standards);
+        return $json;
+    }
+
     public function fechAzmoon()
     {
         // $azmoons = Azmoon::all();

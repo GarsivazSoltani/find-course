@@ -22,3 +22,4 @@ Route::get('azmoondata', [HomeController::class, 'fechAzmoonData'])->name('azmoo
 Route::get('azmoonhoze', [HomeController::class, 'fechAzmoonHoze'])->name('azmoonHoze');
 Route::get('join', [HomeController::class, 'joinTables'])->name('joinTable');
 
+Route::get('standard/json', [HomeController::class, 'findStandardJson'])->name('standard.json');
