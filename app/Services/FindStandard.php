@@ -41,10 +41,11 @@ class FindStandard
 
         $standards = DB::table('standard')
                     ->join('v_azmoon', 'standard.id', '=', 'v_azmoon.standard_id')
-                    ->select('v_azmoon.id', 'v_azmoon.name', 'v_azmoon.ostanname')
+                    ->select('v_azmoon.*', 'standard.*')
                     ->where('standard.name', 'like', '%' . $request->standard . '%')
                     ->orderBy('standard.name')
                     ->paginate(10);
+        // dd($standards);
         return $standards;
     }
 }

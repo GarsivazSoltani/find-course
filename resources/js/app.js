@@ -1,5 +1,6 @@
 import './bootstrap';
 
+/*
 const inputStandardName = document.getElementById('standard');
 const btnFindStandard = document.getElementById('btnFindStandard');
 const standardList = document.getElementById('standardList');
@@ -40,3 +41,4 @@ fetchStandardApi().then(data => {
         console.log('garsivaz:', data);
     }
 });
+*/
